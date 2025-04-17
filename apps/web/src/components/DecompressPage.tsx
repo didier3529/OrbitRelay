@@ -25,7 +25,6 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from './ui/alert-dialog'
-import { Link } from 'react-router-dom'
 import { Header } from './Header'
 import { BN } from '@coral-xyz/anchor'
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
@@ -212,7 +211,7 @@ export function DecompressPage() {
             },
             body: JSON.stringify({
               jsonrpc: '2.0',
-              id: 'helius-airship',
+              id: 'orbitrelay',
               method: 'getAssetBatch',
               params: {
                 ids: ids,
@@ -646,8 +645,10 @@ export function DecompressPage() {
       <Header />
       <Card className="w-full max-w-3xl">
         <CardHeader className="flex flex-row justify-between space-y-0">
-          <CardTitle className="text-3xl font-bold text-primary">Token Portfolio</CardTitle>
-          <WalletMultiButton />
+          <CardTitle className="text-3xl font-bold orbit-text">Token Portfolio</CardTitle>
+          <div className="wallet-adapter-button hover:bg-[rgba(100,255,218,0.1)] border border-[#64ffda] transition-colors">
+            <WalletMultiButton />
+          </div>
         </CardHeader>
         <CardContent className="space-y-4">
           {connected && publicKey ? (
@@ -735,9 +736,16 @@ export function DecompressPage() {
           )}
         </CardContent>
       </Card>
-      <Link to="/" className="text-primary text-white shadow-lg hover:underline">
+      <a
+        href="#"
+        onClick={(e) => {
+          e.preventDefault();
+          window.location.href = '/';
+        }}
+        className="text-[#64ffda] hover:text-[#00b4d8] transition-colors duration-300 hover:underline"
+      >
         Back to Home
-      </Link>
+      </a>
       <AlertDialog open={alertDialogOpen} onOpenChange={setAlertDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
